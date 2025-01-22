@@ -69,3 +69,8 @@ def delete_task(request, task_id):
         task.delete()
         return redirect('task_list')
     return render(request, 'task_app/delete_task.html', {'task': task})
+
+
+def task_list(request):
+    tasks = Task.objects.all()  # Get all tasks for now, you can filter it later
+    return render(request, 'task_app/task_list.html', {'tasks': tasks})
