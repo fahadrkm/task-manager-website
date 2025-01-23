@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect , get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
@@ -71,6 +71,13 @@ def delete_task(request, task_id):
     return render(request, 'task_app/delete_task.html', {'task': task})
 
 
+
 def task_list(request):
     tasks = Task.objects.all()  # Get all tasks for now, you can filter it later
     return render(request, 'task_app/task_list.html', {'tasks': tasks})
+
+def complete_task(request, task_id):
+    task = get_object_or_404(Task, id=task_id)
+    task.completed = True
+    task.save()
+    return redirect('task_list')
