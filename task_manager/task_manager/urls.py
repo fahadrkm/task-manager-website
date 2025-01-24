@@ -20,4 +20,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('task_app.urls')),
+    path('delete/<int:task_id>/', views.delete_task, name='delete_task'),
+
 ]
